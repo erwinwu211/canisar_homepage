@@ -7,14 +7,14 @@
     ja: {
       title: 'CanisAR — 人と、デジタルのいのちをつなぐ。',
       description: 'CanisARは、人とペットのインタラクションと動作生成の研究を通じて、デジタルのいのちと心が通う未来を目指します。',
-      contactTitle: 'お問い合わせ・チーム — CanisAR',
+      contactTitle: '会社概要・チーム — CanisAR',
       contactDescription: 'CanisARのチームと、共同研究・技術開発・パートナーシップについて。',
       navigation: 'メインナビゲーション', scroll: 'ビジョンへ移動', home: 'CanisAR ホーム',
     },
     en: {
       title: 'CanisAR — Virtual companions. Real connections.',
       description: 'CanisAR explores human–pet interaction and motion generation to build a future with digital companions that feel closer to life.',
-      contactTitle: 'Contact & Team — CanisAR',
+      contactTitle: 'About Us — CanisAR',
       contactDescription: 'Meet the CanisAR team and explore research, technology development, and partnership opportunities.',
       navigation: 'Main navigation', scroll: 'Scroll to Vision', home: 'CanisAR home',
     },
