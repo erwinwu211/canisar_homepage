@@ -788,14 +788,14 @@ html[lang="en"] .research-content>p:not(.paper-title) {
   margin-bottom:28px;
 }
 
-.media-heading .eyebrow,.prototype-copy .eyebrow {
+.media-heading .eyebrow,.prototype-copy .eyebrow,.gaussian-copy .eyebrow {
   color:var(--accent);
   font-size:9px;
   letter-spacing:1.8px;
   margin-bottom:14px;
 }
 
-.media-heading h3,.prototype-copy h3 {
+.media-heading h3,.prototype-copy h3,.gaussian-copy h3 {
   font-size:clamp(25px,2.5vw,34px);
   font-weight:500;
   line-height:1.5;
@@ -808,17 +808,13 @@ html[lang="en"] .research-content>p:not(.paper-title) {
   font-size:12px;
 }
 
-.sample-grid {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:22px;
-}
-
-.sample-card {
+.capture-feature {
   min-width:0;
+  max-width:1040px;
+  margin-inline:auto;
 }
 
-.sample-card video,.prototype-video video {
+.capture-feature video,.prototype-video video {
   display:block;
   width:100%;
   height:auto;
@@ -829,13 +825,21 @@ html[lang="en"] .research-content>p:not(.paper-title) {
   border-radius:4px;
 }
 
+.capture-feature video {
+  aspect-ratio:1920/922;
+}
+
 video:focus-visible {
   outline:2px solid var(--accent);
   outline-offset:5px;
 }
 
-.sample-card figcaption {
-  padding-top:18px;
+.capture-caption {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:24px;
+  padding-top:20px;
 }
 
 .media-index {
@@ -845,17 +849,111 @@ video:focus-visible {
   letter-spacing:1px;
 }
 
-.sample-card h4 {
-  margin:11px 0 7px;
-  font-size:15px;
+.capture-caption h4 {
+  margin:10px 0 0;
+  font-size:18px;
   line-height:1.6;
   font-weight:500;
 }
 
-.sample-card figcaption p {
+.capture-caption p {
+  max-width:370px;
   color:var(--muted);
   font-size:12px;
   line-height:1.8;
+}
+
+.gaussian-showcase {
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:460px;
+  gap:160px;
+  margin-top:64px;
+  padding:36px 32px 28px;
+  border-block:1px solid var(--line);
+  overflow:hidden;
+}
+
+.gaussian-background {
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:center;
+  opacity:.42;
+  pointer-events:none;
+  mask-image:linear-gradient(transparent,#000 18%,#000 80%,transparent);
+}
+
+.gaussian-background video {
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:0;
+  object-fit:cover;
+  filter:saturate(.65);
+}
+
+.gaussian-showcase::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(#0d151abf,transparent 48%,#0d151a80);
+  pointer-events:none;
+}
+
+.gaussian-copy {
+  max-width:510px;
+}
+
+.gaussian-copy>p:not(.eyebrow) {
+  margin-top:12px;
+  color:#b6c4cc;
+  font-size:12px;
+  line-height:1.9;
+}
+
+.gaussian-footer,.gaussian-links {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:24px;
+}
+
+.gaussian-footer {
+  justify-content:space-between;
+}
+
+.motion-toggle {
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:10px 12px;
+  border:1px solid #3b4d58;
+  border-radius:3px;
+  background:#0d151a99;
+  color:#b6c4cc;
+  font-size:11px;
+  cursor:pointer;
+}
+
+.motion-toggle[hidden] {
+  display:none;
+}
+
+.motion-toggle:hover {
+  color:var(--text);
+  border-color:var(--accent);
+}
+
+.motion-toggle-icon {
+  width:12px;
+  text-align:center;
 }
 
 .prototype-showcase {
@@ -1445,12 +1543,27 @@ html[lang="en"] .contact-copy>p {
   .media-heading>p {
     max-width:100%;
   }
-  .sample-grid {
-    grid-template-columns:1fr;
-    gap:30px;
-  }
-  .sample-card figcaption {
+  .capture-caption {
+    flex-direction:column;
+    align-items:start;
+    gap:10px;
     padding-top:14px;
+  }
+  .gaussian-showcase {
+    min-height:520px;
+    margin-top:40px;
+    padding:26px 0;
+  }
+  .gaussian-background {
+    grid-template-columns:1fr;
+    grid-template-rows:repeat(2,minmax(0,1fr));
+    opacity:.34;
+  }
+  .gaussian-background video {
+    object-fit:contain;
+  }
+  .gaussian-footer {
+    gap:20px;
   }
   .prototype-showcase {
     grid-template-columns:1fr;

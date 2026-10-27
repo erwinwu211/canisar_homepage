@@ -4,7 +4,7 @@ A buildless, responsive Japanese / English homepage with Vision, Research, and C
 
 - `index.html`: content and bilingual copy (`data-ja` / `data-en`).
 - `styles.css`: layout, visual design, and mobile styles.
-- `site.js`: language switching, saved language preference, and section navigation.
+- `site.js`: language switching, saved language preference, section navigation, and Gaussian background playback controls.
 - `assets/`: original SVG illustrations, favicon, locally hosted team photos, and research videos. No external fonts or JavaScript dependencies.
 
 Serve the directory with any static HTTP server, for example `python3 -m http.server 4173`, then open `http://localhost:4173`. No build or installation is required.
@@ -15,7 +15,9 @@ The existing GitHub Pages setup (`CNAME` and `.nojekyll`) is preserved. All sour
 
 Research data is attributed to [InterPet4D, arXiv:2607.10287](https://arxiv.org/abs/2607.10287). The diagrams are original conceptual illustrations, not dataset captures or product screenshots.
 
-The Research section also includes owner-provided videos with Japanese / English captions. Videos use native playback and fullscreen controls, poster images, and `preload="none"` so the video files are requested when visitors play them.
+The Research section also includes owner-provided videos with Japanese / English captions. The multi-view capture has a dedicated, larger player; the application prototype keeps its native playback and fullscreen controls. Both use posters and `preload="none"` to load video on demand.
+
+The two Gaussian samples play as muted, translucent backgrounds in a separate showcase, with links to view each complete video clearly. Background playback starts when the showcase enters the viewport and pauses when it leaves or the page is hidden. A bilingual pause/play button is available; visitors who prefer reduced motion initially see static posters and can opt into playback.
 
 | Published video in `assets/video/web/` | Local source | Content |
 | --- | --- | --- |

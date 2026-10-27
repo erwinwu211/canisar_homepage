@@ -48,6 +48,60 @@
   languageButtons.forEach((button) => {
     button.addEventListener('click', () => setLanguage(button.dataset.language, true));
   });
+
+  const gaussianSection = document.querySelector('.gaussian-showcase');
+  if (gaussianSection) {
+    const videos = [...gaussianSection.querySelectorAll('video')];
+    const toggle = gaussianSection.querySelector('.motion-toggle');
+    const label = toggle.querySelector('[data-motion-label]');
+    const icon = toggle.querySelector('.motion-toggle-icon');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let paused = reducedMotion.matches;
+    let visible = false;
+
+    function updateBackground() {
+      const shouldPlay = visible && !paused && !document.hidden;
+      videos.forEach((video) => {
+        if (shouldPlay) {
+          video.play().catch(() => {
+            // Keep the posters usable if the browser declines automatic playback.
+            if (visible && !paused && !document.hidden) {
+              paused = true;
+              updateBackground();
+            }
+          });
+        } else {
+          video.pause();
+        }
+      });
+      label.dataset.ja = paused ? '背景を再生' : '背景を一時停止';
+      label.dataset.en = paused ? 'Play background' : 'Pause background';
+      label.textContent = label.dataset[document.documentElement.lang];
+      icon.textContent = paused ? '▶' : 'Ⅱ';
+    }
+
+    toggle.hidden = false;
+    toggle.addEventListener('click', () => {
+      paused = !paused;
+      updateBackground();
+    });
+    reducedMotion.addEventListener('change', (event) => {
+      paused = event.matches;
+      updateBackground();
+    });
+    document.addEventListener('visibilitychange', updateBackground);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting;
+        updateBackground();
+      }, { threshold:0 });
+      observer.observe(gaussianSection);
+    } else {
+      visible = true;
+    }
+    updateBackground();
+  }
+
   const navigationLinks = [...document.querySelectorAll('.main-nav a')];
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
