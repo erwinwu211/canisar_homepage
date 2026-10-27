@@ -36,7 +36,7 @@ Team photos on the Contact page (roles supplied by the site owner):
 | Person | Role | Photo source |
 | --- | --- | --- |
 | Erwin Wu | CEO | [Personal homepage](https://erwinwu.com/), [original photo](https://erwinwu.com/images/erwin.png) |
-| Chen-Chieh Liao | CFO | [Personal homepage](https://liaochenchieh.com/), [original photo](https://liaochenchieh.com/assets/img/prof_pic.jpg) |
+| Chen-Chieh Liao | COO | [Personal homepage](https://liaochenchieh.com/), [original photo](https://liaochenchieh.com/assets/img/prof_pic.jpg) |
 | Yichen Peng | CTO | Owner-provided `pengyichen.jpg` |
 
 Photos retrieved on 2026-10-27. Source images are preserved; consistent cropping and grayscale presentation are applied through CSS, with original color on hover for pointer devices.
