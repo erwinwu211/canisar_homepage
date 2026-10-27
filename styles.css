@@ -145,7 +145,7 @@ p {
   transition:color .2s;
 }
 
-.main-nav a:hover,.main-nav a[aria-current="location"] {
+.main-nav a:hover,.main-nav a[aria-current] {
   color:var(--accent);
 }
 
@@ -162,7 +162,7 @@ p {
   transition:transform .2s;
 }
 
-.main-nav a[aria-current="location"]::after {
+.main-nav a[aria-current]::after {
   transform:scaleX(1);
 }
 
@@ -435,14 +435,14 @@ html[lang="en"] .hero-description {
   margin-left:12px;
 }
 
-h2 {
+h2,.contact-page-title {
   font-size:clamp(30px,3.35vw,46px);
   line-height:1.6;
   letter-spacing:-.045em;
   font-weight:500;
 }
 
-html[lang="en"] h2 {
+html[lang="en"] h2,html[lang="en"] .contact-page-title {
   line-height:1.2;
   font-size:clamp(32px,3.5vw,49px);
   letter-spacing:-.05em;
@@ -996,6 +996,10 @@ video:focus-visible {
   background:radial-gradient(ellipse at 15% 100%,#172c392e,transparent 65%);
 }
 
+.contact-page-title,html[lang="en"] .contact-page-title {
+  margin:0;
+}
+
 .contact-layout {
   display:grid;
   grid-template-columns:1.1fr 1fr;
@@ -1065,12 +1069,13 @@ html[lang="en"] .contact-copy>p {
   margin-top:64px;
 }
 
-.team-heading {
+.team-heading,html[lang="en"] .team-heading {
   margin:0 0 26px;
   padding-bottom:18px;
   border-bottom:1px solid var(--line);
   color:#b8cbd6;
   font-size:13px;
+  line-height:1.6;
   font-weight:500;
   letter-spacing:.04em;
 }
@@ -1115,7 +1120,7 @@ html[lang="en"] .contact-copy>p {
   padding-top:16px;
 }
 
-.team-member-info h4 {
+.team-member-info h3 {
   margin:0;
   font-size:18px;
   line-height:1.4;
@@ -1417,11 +1422,11 @@ html[lang="en"] .contact-copy>p {
     gap:28px;
     margin-top:34px;
   }
-  h2 {
+  h2,.contact-page-title {
     font-size:clamp(30px,6.7vw,44px);
     line-height:1.6;
   }
-  html[lang="en"] h2 {
+  html[lang="en"] h2,html[lang="en"] .contact-page-title {
     font-size:clamp(31px,7.5vw,45px);
   }
   .vision-copy .lead {
@@ -1610,7 +1615,7 @@ html[lang="en"] .contact-copy>p {
     gap:6px;
     padding-top:12px;
   }
-  .team-member-info h4 {
+  .team-member-info h3 {
     min-height:2.8em;
     font-size:clamp(11px,3vw,14px);
   }

@@ -1,15 +1,16 @@
 # CanisAR homepage
 
-A buildless, responsive Japanese / English homepage with Vision, Research, and Contact sections.
+A buildless, responsive Japanese / English website with Vision and Research on the homepage and a separate Contact / Team page.
 
-- `index.html`: content and bilingual copy (`data-ja` / `data-en`).
+- `index.html`: homepage with Vision, Research, and bilingual copy (`data-ja` / `data-en`).
+- `contact.html`: standalone Contact page with the team, roles, and responsibilities.
 - `styles.css`: layout, visual design, and mobile styles.
 - `site.js`: language switching, saved language preference, section navigation, and Gaussian background playback controls.
 - `assets/`: original SVG illustrations, favicon, locally hosted team photos, and research videos. No external fonts or JavaScript dependencies.
 
 Serve the directory with any static HTTP server, for example `python3 -m http.server 4173`, then open `http://localhost:4173`. No build or installation is required.
 
-Japanese is the default language. `?lang=en` and `?lang=ja` create language-specific links; the language buttons remember the visitor’s choice when browser storage is available.
+Japanese is the default language. `?lang=en` and `?lang=ja` create language-specific links on both pages; cross-page navigation preserves the selected language through the URL, and the language buttons remember the visitor’s choice when browser storage is available.
 
 The existing GitHub Pages setup (`CNAME` and `.nojekyll`) is preserved. All source files are served directly from the repository root.
 
@@ -28,9 +29,9 @@ The two Gaussian samples play as muted, translucent backgrounds in a separate sh
 
 Web copies are H.264 MP4 with fast-start metadata and AAC audio where present. Multi-view capture and the prototype are 1920 pixels wide; the Gaussian samples are 1280 pixels wide. Each `.jpg` poster is a frame from its corresponding video. Original source videos are retained locally and ignored by Git; only the optimized copies and posters are deployed.
 
-The Contact section is awaiting a confirmed public email address.
+The Contact page is awaiting a confirmed public email address.
 
-Team photos in the Contact section (roles supplied by the site owner):
+Team photos on the Contact page (roles supplied by the site owner):
 
 | Person | Role | Photo source |
 | --- | --- | --- |

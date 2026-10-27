@@ -2,15 +2,20 @@
   'use strict';
   const languages = new Set(['ja', 'en']);
   const languageButtons = document.querySelectorAll('[data-language]');
+  const isContactPage = document.body.dataset.page === 'contact';
   const metadata = {
     ja: {
       title: 'CanisAR — 人と、デジタルのいのちをつなぐ。',
       description: 'CanisARは、人とペットのインタラクションと動作生成の研究を通じて、デジタルのいのちと心が通う未来を目指します。',
+      contactTitle: 'お問い合わせ・チーム — CanisAR',
+      contactDescription: 'CanisARのチームと、共同研究・技術開発・パートナーシップについて。',
       navigation: 'メインナビゲーション', scroll: 'ビジョンへ移動', home: 'CanisAR ホーム',
     },
     en: {
       title: 'CanisAR — Virtual companions. Real connections.',
       description: 'CanisAR explores human–pet interaction and motion generation to build a future with digital companions that feel closer to life.',
+      contactTitle: 'Contact & Team — CanisAR',
+      contactDescription: 'Meet the CanisAR team and explore research, technology development, and partnership opportunities.',
       navigation: 'Main navigation', scroll: 'Scroll to Vision', home: 'CanisAR home',
     },
   };
@@ -29,10 +34,15 @@
     languageButtons.forEach((button) => {
       button.setAttribute('aria-pressed', String(button.dataset.language === language));
     });
-    document.title = metadata[language].title;
-    document.querySelector('meta[name="description"]').content = metadata[language].description;
+    document.querySelectorAll('[data-page-link]').forEach((link) => {
+      const url = new URL(link.getAttribute('href'), window.location.href);
+      url.searchParams.set('lang', language);
+      link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+    });
+    document.title = isContactPage ? metadata[language].contactTitle : metadata[language].title;
+    document.querySelector('meta[name="description"]').content = isContactPage ? metadata[language].contactDescription : metadata[language].description;
     document.querySelector('.main-nav').setAttribute('aria-label', metadata[language].navigation);
-    document.querySelector('.hero-baseline a').setAttribute('aria-label', metadata[language].scroll);
+    document.querySelector('.hero-baseline a')?.setAttribute('aria-label', metadata[language].scroll);
     document.querySelector('.site-header .brand').setAttribute('aria-label', metadata[language].home);
     if (persist) {
       try { localStorage.setItem('canisar-language', language); } catch { /* Storage may be unavailable. */ }
@@ -102,8 +112,8 @@
     updateBackground();
   }
 
-  const navigationLinks = [...document.querySelectorAll('.main-nav a')];
-  if ('IntersectionObserver' in window) {
+  const navigationLinks = [...document.querySelectorAll('.main-nav a')].filter((link) => link.getAttribute('href').startsWith('#'));
+  if ('IntersectionObserver' in window && navigationLinks.length) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const link = navigationLinks.find((item) => item.hash === `#${entry.target.id}`);
@@ -115,6 +125,6 @@
         }
       });
     }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
-    document.querySelectorAll('#vision, #research, #contact').forEach((section) => observer.observe(section));
+    document.querySelectorAll('#vision, #research').forEach((section) => observer.observe(section));
   }
 })();
