@@ -1697,7 +1697,8 @@ html[lang="en"] .contact-copy>p {
 @media(max-width:700px){.research-menu summary{font-size:11px;padding:9px 0}.research-dropdown{left:50%;transform:translateX(-50%);width:205px}.sports-grid{grid-template-columns:1fr}.sports-group-heading{display:block}.sports-group-heading p{margin-top:18px}.sports-card-body{padding:24px}.sports-card img{height:auto;max-height:300px}.page-intro{padding-top:50px}.page-lead{font-size:15px}.topic-nav{gap:20px;font-size:11px}.sports-group{padding-block:40px}.direction-card{padding:22px}}
 
 /* Generated home visuals preserve their full composition. */
-.interaction-visual {width:100%;margin-left:0;overflow:hidden;border-radius:16px;background:#090f13}
+.interaction-visual {width:100%;margin-left:0;overflow:hidden;background:transparent}
+.interaction-visual .companion {-webkit-mask-image:radial-gradient(ellipse at 50% 48%,#000 35%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 48%,#000 35%,transparent 72%)}
 .interaction-visual .visual-topline {z-index:1;left:6%;right:6%;top:22px;color:#c2dbe9}
 .interaction-visual figcaption {left:6%;right:6%;bottom:6%;color:#c2dbe9;text-shadow:0 1px 8px #000}
-.direction-card img.generated-direction {height:auto;aspect-ratio:3/2;object-fit:contain;border-radius:8px}
+.direction-card img.generated-direction {height:auto;aspect-ratio:3/2;object-fit:contain;-webkit-mask-image:radial-gradient(ellipse at center,#000 40%,transparent 73%);mask-image:radial-gradient(ellipse at center,#000 40%,transparent 73%)}
