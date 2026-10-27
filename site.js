@@ -39,8 +39,11 @@
       url.searchParams.set('lang', language);
       link.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
     });
-    document.title = isContactPage ? metadata[language].contactTitle : metadata[language].title;
-    document.querySelector('meta[name="description"]').content = isContactPage ? metadata[language].contactDescription : metadata[language].description;
+    const page = document.body.dataset.page || 'home';
+    const titles = {home: language === 'ja' ? 'CanisAR — 人と、動きと、可能性をつなぐ。' : 'CanisAR — People. Motion. New possibilities.', pet:'Pet Interaction — CanisAR', sports:'Sports Interaction — CanisAR', contact:metadata[language].contactTitle};
+    document.title = titles[page];
+    const descriptions = {home: language === 'ja' ? 'ペットとスポーツのインタラクションを通じた技術製品の研究開発。' : 'Research and technology development in pet and sports interaction.', pet: language === 'ja' ? '人とペットのインタラクション、InterPet4D、バーチャルペットの研究開発。' : 'Human–pet interaction, InterPet4D, and virtual companion research.', sports: language === 'ja' ? 'スキー、ゴルフ、足圧センシングと技能支援の研究。' : 'Skiing, golf, foot-pressure sensing, and skill acquisition research.',contact:metadata[language].contactDescription};
+    document.querySelector('meta[name="description"]').content = descriptions[page];
     document.querySelector('.main-nav').setAttribute('aria-label', metadata[language].navigation);
     document.querySelector('.hero-baseline a')?.setAttribute('aria-label', metadata[language].scroll);
     document.querySelector('.site-header .brand').setAttribute('aria-label', metadata[language].home);
@@ -59,6 +62,10 @@
     button.addEventListener('click', () => setLanguage(button.dataset.language, true));
   });
 
+  const menu = document.querySelector('.research-menu');
+  document.addEventListener('click', (event) => { if (menu && !menu.contains(event.target)) menu.open = false; });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && menu?.open) { menu.open = false; menu.querySelector('summary').focus(); } });
+  document.addEventListener('focusin', (event) => { if (menu && !menu.contains(event.target)) menu.open = false; });
   const gaussianSection = document.querySelector('.gaussian-showcase');
   if (gaussianSection) {
     const videos = [...gaussianSection.querySelectorAll('video')];
