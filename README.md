@@ -5,7 +5,7 @@ A buildless, responsive Japanese / English homepage with Vision, Research, and C
 - `index.html`: content and bilingual copy (`data-ja` / `data-en`).
 - `styles.css`: layout, visual design, and mobile styles.
 - `site.js`: language switching, saved language preference, and section navigation.
-- `assets/`: original SVG illustrations and favicon. No external fonts or JavaScript dependencies.
+- `assets/`: original SVG illustrations, favicon, and locally hosted team photos. No external fonts or JavaScript dependencies.
 
 Serve the directory with any static HTTP server, for example `python3 -m http.server 4173`, then open `http://localhost:4173`. No build or installation is required.
 
@@ -16,3 +16,13 @@ The existing GitHub Pages setup (`CNAME` and `.nojekyll`) is preserved. All sour
 Research data is attributed to [InterPet4D, arXiv:2607.10287](https://arxiv.org/abs/2607.10287). The diagrams are original conceptual illustrations, not dataset captures or product screenshots.
 
 The Contact section is awaiting a confirmed public email address.
+
+Team photos in the Contact section (roles supplied by the site owner):
+
+| Person | Role | Photo source |
+| --- | --- | --- |
+| Erwin Wu | CEO | [Personal homepage](https://erwinwu.com/), [original photo](https://erwinwu.com/images/erwin.png) |
+| Chen-Chieh Liao | CFO | [Personal homepage](https://liaochenchieh.com/), [original photo](https://liaochenchieh.com/assets/img/prof_pic.jpg) |
+| Yichen Peng | CTO | Owner-provided `pengyichen.jpg` |
+
+Photos retrieved on 2026-10-27. Source images are preserved; consistent cropping and grayscale presentation are applied through CSS, with original color on hover for pointer devices.
