@@ -1,0 +1,7 @@
+.DS_Store
+
+# Keep owner-provided source videos locally; publish optimized copies in web/.
+/assets/video/interpet_sample.mp4
+/assets/video/gaussian1.mp4
+/assets/video/gaussian2.mp4
+/assets/video/intarpet.mp4
