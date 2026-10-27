@@ -861,11 +861,20 @@ html[lang="en"] .contact-copy>p {
 .team-grid {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:32px;
+  gap:40px;
+  max-width:800px;
+  margin-inline:auto;
+}
+
+.team-member {
+  min-width:0;
+  text-align:center;
 }
 
 .team-portrait {
-  aspect-ratio:1 / 1.1;
+  width:min(160px,100%);
+  aspect-ratio:1;
+  margin-inline:auto;
   overflow:hidden;
   background:var(--surface);
   border:1px solid var(--line);
@@ -883,15 +892,15 @@ html[lang="en"] .contact-copy>p {
 
 .team-member-info {
   display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap:16px;
-  padding-top:20px;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  padding-top:16px;
 }
 
 .team-member-info h4 {
   margin:0;
-  font-size:22px;
+  font-size:18px;
   line-height:1.4;
   font-weight:500;
   letter-spacing:-.035em;
@@ -902,6 +911,15 @@ html[lang="en"] .contact-copy>p {
   font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
   font-size:11px;
   letter-spacing:1.5px;
+}
+
+.team-responsibility {
+  max-width:220px;
+  margin-top:4px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+  text-wrap:pretty;
 }
 
 @media (hover:hover) {
@@ -1320,17 +1338,25 @@ html[lang="en"] .contact-copy>p {
     margin-top:40px;
   }
   .team-grid {
-    grid-template-columns:1fr;
-    gap:32px;
+    gap:14px;
   }
   .team-portrait {
-    aspect-ratio:1;
+    width:min(140px,100%);
   }
   .team-member-info {
-    padding-top:16px;
+    gap:6px;
+    padding-top:12px;
   }
   .team-member-info h4 {
-    font-size:22px;
+    min-height:2.8em;
+    font-size:clamp(11px,3vw,14px);
+  }
+  .team-role {
+    font-size:10px;
+  }
+  .team-responsibility {
+    font-size:11px;
+    line-height:1.7;
   }
   .contact-topics span {
     font-size:9px;
