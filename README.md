@@ -14,7 +14,7 @@ Japanese is the default language. `?lang=en` and `?lang=ja` create language-spec
 
 The existing GitHub Pages setup (`CNAME` and `.nojekyll`) is preserved. All source files are served directly from the repository root.
 
-Research data is attributed to [InterPet4D, arXiv:2607.10287](https://arxiv.org/abs/2607.10287). The diagrams are original conceptual illustrations, not dataset captures or product screenshots.
+Research data is attributed to [InterPet4D, arXiv:2607.10287](https://arxiv.org/abs/2607.10287). The Pet Interaction research figure uses the owner-provided InterPet4D teaser PDF, adapted with a transparent background and light labels for the dark website. Asset provenance and the image editing prompt are recorded in `assets/research/README.md`.
 
 The Research section also includes owner-provided videos with Japanese / English captions. The multi-view capture has a dedicated, larger player; the application prototype keeps its native playback and fullscreen controls. Both use posters and `preload="none"` to load video on demand.
 
