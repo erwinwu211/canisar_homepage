@@ -22,6 +22,7 @@
   const pixels = Uint8Array.from(atob(sample.rgb), (character) => character.charCodeAt(0));
   let particles = [], width = 0, height = 0, frame = 0, lastTime = 0;
   let visible = true, ready = false;
+  let contactPointerId = null;
   const pointer = { x: -1000, y: -1000, active: false };
 
   function setReady(value) {
@@ -31,6 +32,13 @@
     canvas.style.opacity = value ? '1' : '0';
     canvas.hidden = !value;
     figure.classList.toggle('particles-ready', value);
+    // One-finger drags stir the artwork; keep browser pinch-to-zoom available.
+    // Restore normal scrolling whenever the static fallback is displayed.
+    figure.style.touchAction = value ? 'pinch-zoom' : '';
+    figure.style.userSelect = value ? 'none' : '';
+    figure.style.webkitTouchCallout = value ? 'none' : '';
+    image.draggable = !value;
+    if (!value) stopInteraction();
   }
 
   function draw() {
@@ -118,24 +126,58 @@
     setReady(true);
     wake();
   }
-  figure.addEventListener('pointermove', (event) => {
-    if (event.pointerType === 'touch') return;
+  function movePointer(event) {
+    if (!ready) return;
     const bounds = canvas.getBoundingClientRect();
-    pointer.x = event.clientX - bounds.left;
-    pointer.y = event.clientY - bounds.top;
+    pointer.x = (event.clientX - bounds.left) * width / bounds.width;
+    pointer.y = (event.clientY - bounds.top) * height / bounds.height;
     pointer.active = true;
     wake();
+  }
+  function stopInteraction() {
+    const previousPointerId = contactPointerId;
+    contactPointerId = null;
+    pointer.active = false;
+    if (previousPointerId !== null && figure.hasPointerCapture(previousPointerId)) {
+      figure.releasePointerCapture(previousPointerId);
+    }
+    wake();
+  }
+  figure.addEventListener('pointerdown', (event) => {
+    if (!ready) return;
+    if (event.pointerType !== 'mouse') {
+      // Hand a second finger back to the browser for zooming.
+      if (!event.isPrimary) { stopInteraction(); return; }
+      contactPointerId = event.pointerId;
+      figure.setPointerCapture(event.pointerId);
+    }
+    movePointer(event);
   });
-  function leave() { pointer.active = false; wake(); }
-  figure.addEventListener('pointerleave', leave);
-  figure.addEventListener('pointercancel', leave);
-  window.addEventListener('blur', leave);
+  figure.addEventListener('pointermove', (event) => {
+    if (event.pointerType === 'mouse') {
+      if (contactPointerId === null) movePointer(event);
+    } else if (event.pointerId === contactPointerId) {
+      movePointer(event);
+    }
+  });
+  function endContact(event) {
+    if (event.pointerId === contactPointerId) stopInteraction();
+  }
+  figure.addEventListener('pointerup', endContact);
+  figure.addEventListener('lostpointercapture', endContact);
+  figure.addEventListener('pointercancel', (event) => {
+    if (event.pointerType === 'mouse' || event.pointerId === contactPointerId) stopInteraction();
+  });
+  figure.addEventListener('pointerleave', () => {
+    if (contactPointerId === null) stopInteraction();
+  });
+  window.addEventListener('blur', stopInteraction);
   motion.addEventListener('change', rebuild);
-  document.addEventListener('visibilitychange', () => { pointer.active = false; wake(); });
+  document.addEventListener('visibilitychange', stopInteraction);
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
-      if (!visible) pointer.active = false;
+      if (!visible) stopInteraction();
       wake();
     }).observe(figure);
   }
