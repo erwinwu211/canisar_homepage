@@ -7,6 +7,13 @@
   const canvas = document.createElement('canvas');
   canvas.className = 'hero-particles';
   canvas.setAttribute('aria-hidden', 'true');
+  canvas.hidden = true;
+  // Keep the replacement in the image's slot even with a cached, older stylesheet.
+  const mask = getComputedStyle(image).maskImage;
+  Object.assign(canvas.style, {
+    position: 'absolute', inset: '0', width: '100%', height: '100%',
+    pointerEvents: 'none', opacity: '0', maskImage: mask, webkitMaskImage: mask,
+  });
   const context = canvas.getContext('2d');
   if (!context) return;
   figure.append(canvas);
@@ -16,6 +23,15 @@
   let particles = [], width = 0, height = 0, frame = 0, lastTime = 0;
   let visible = true, ready = false;
   const pointer = { x: -1000, y: -1000, active: false };
+
+  function setReady(value) {
+    ready = value;
+    // Opacity preserves the image's layout and accessible description.
+    image.style.opacity = value ? '0' : '1';
+    canvas.style.opacity = value ? '1' : '0';
+    canvas.hidden = !value;
+    figure.classList.toggle('particles-ready', value);
+  }
 
   function draw() {
     context.clearRect(0, 0, width, height);
@@ -70,8 +86,7 @@
 
   function rebuild() {
     if (!image.naturalWidth || motion.matches) {
-      figure.classList.remove('particles-ready');
-      ready = false;
+      setReady(false);
       return;
     }
     width = image.clientWidth;
@@ -99,9 +114,8 @@
           size: step * (light > 110 ? 1.05 : 0.83), color: `rgb(${r},${g},${b})` });
       }
     }
-    ready = true;
     draw();
-    figure.classList.add('particles-ready');
+    setReady(true);
     wake();
   }
   figure.addEventListener('pointermove', (event) => {
